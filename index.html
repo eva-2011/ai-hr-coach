@@ -145,44 +145,31 @@
     .theme-toggle {
       display: flex;
       align-items: center;
-      gap: 8px;
     }
 
-    .toggle-switch {
-      position: relative;
-      width: 50px;
-      height: 26px;
-      background: var(--surface-container-high);
-      border-radius: 13px;
-      cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      transition: all 0.3s ease;
-    }
-
-    .toggle-switch.active {
-      background: var(--primary);
-    }
-
-    .toggle-slider {
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 22px;
-      height: 22px;
-      background: white;
-      border-radius: 50%;
-      transition: left 0.3s ease;
-    }
-
-    .toggle-switch.active .toggle-slider {
-      left: 26px;
-    }
-
-    .toggle-label {
-      font-size: 12px;
-      font-weight: 500;
+    .theme-icon-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid rgba(128,128,128,0.2);
+      background: var(--surface-container);
       color: var(--on-surface-variant);
-      user-select: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease-out;
+      flex-shrink: 0;
+    }
+
+    .theme-icon-btn:hover {
+      background: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+
+    .theme-icon-btn svg {
+      width: 16px;
+      height: 16px;
     }
 
     .content {
@@ -457,15 +444,45 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      padding: 4px 8px;
+      padding: 4px 9px;
       border-radius: 4px;
-      background: rgba(69, 93, 211, 0.15);
-      color: #b3d9ff;
+      white-space: nowrap;
     }
 
+    /* In Progress — amber */
+    .task-status.in-progress {
+      background: rgba(255, 138, 51, 0.18);
+      color: #ff8a33;
+    }
+    :root.light-mode .task-status.in-progress {
+      background: rgba(255, 138, 51, 0.15);
+      color: #b85c00;
+    }
+
+    /* Done — green */
     .task-status.done {
-      background: rgba(69, 93, 211, 0.15);
-      color: #b3d9ff;
+      background: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+    }
+    :root.light-mode .task-status.done {
+      background: rgba(22, 163, 74, 0.12);
+      color: #15803d;
+    }
+
+    /* This Week — blue */
+    .task-status.this-week {
+      background: rgba(69, 93, 211, 0.18);
+      color: #8b9ef5;
+    }
+    :root.light-mode .task-status.this-week {
+      background: rgba(69, 93, 211, 0.12);
+      color: #3246b8;
+    }
+
+    /* Coming Next / Not Started — muted */
+    .task-status.upcoming {
+      background: rgba(128, 128, 128, 0.14);
+      color: var(--on-surface-variant);
     }
 
     /* Process Flow Visualization */
@@ -709,11 +726,12 @@
           <p id="screen-subtitle"></p>
         </div>
         <div class="theme-toggle">
-          <span class="toggle-label">Dark</span>
-          <div class="toggle-switch" id="themeToggle" onclick="toggleTheme()">
-            <div class="toggle-slider"></div>
-          </div>
-          <span class="toggle-label">Light</span>
+          <button class="theme-icon-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+            <!-- Moon icon (shown in dark mode) -->
+            <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <!-- Sun icon (shown in light mode) -->
+            <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
         </div>
       </div>
 
@@ -1031,7 +1049,7 @@
               <div class="task-title">Complete Sales Process Module</div>
               <div class="task-desc">Learn the 4-step sales cycle with your AI coach</div>
             </div>
-            <span class="task-status done">In Progress</span>
+            <span class="task-status in-progress">In Progress</span>
           </div>
 
           <div class="task-item">
@@ -1040,7 +1058,7 @@
               <div class="task-title">First Customer Outreach</div>
               <div class="task-desc">Conduct your first sales call with a prospect</div>
             </div>
-            <span class="task-status">This Week</span>
+            <span class="task-status this-week">This Week</span>
           </div>
 
           <div class="task-item">
@@ -1049,7 +1067,7 @@
               <div class="task-title">Meet with Account Team</div>
               <div class="task-desc">1-on-1 with your manager to review progress</div>
             </div>
-            <span class="task-status">This Week</span>
+            <span class="task-status this-week">This Week</span>
           </div>
         </div>
 
@@ -1223,14 +1241,14 @@
                 <div class="task-content">
                   <div class="task-title">Step 3: Create Proposal</div>
                 </div>
-                <span class="task-status">In Progress</span>
+                <span class="task-status in-progress">In Progress</span>
               </div>
               <div class="task-item">
                 <input type="checkbox" disabled>
                 <div class="task-content">
                   <div class="task-title">Step 4: Send & Follow Up</div>
                 </div>
-                <span class="task-status">Coming Next</span>
+                <span class="task-status upcoming">Coming Next</span>
               </div>
 
               <div class="progress-container" style="margin-top: 16px;">
@@ -1251,21 +1269,21 @@
                 <div class="task-content">
                   <div class="task-title">Introduction & Overview</div>
                 </div>
-                <span class="task-status">Not Started</span>
+                <span class="task-status upcoming">Not Started</span>
               </div>
               <div class="task-item">
                 <input type="checkbox" disabled>
                 <div class="task-content">
                   <div class="task-title">Core Account Management Principles</div>
                 </div>
-                <span class="task-status">Not Started</span>
+                <span class="task-status upcoming">Not Started</span>
               </div>
               <div class="task-item">
                 <input type="checkbox" disabled>
                 <div class="task-content">
                   <div class="task-title">Building Customer Relationships</div>
                 </div>
-                <span class="task-status">Not Started</span>
+                <span class="task-status upcoming">Not Started</span>
               </div>
 
               <div class="progress-container" style="margin-top: 16px;">
@@ -1367,31 +1385,23 @@
       }
     }
 
-    function toggleTheme() {
-      const html = document.documentElement;
-      const toggle = document.getElementById('themeToggle');
-
-      if (html.classList.contains('light-mode')) {
-        html.classList.remove('light-mode');
-        toggle.classList.remove('active');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        html.classList.add('light-mode');
-        toggle.classList.add('active');
-        localStorage.setItem('theme', 'light');
-      }
+    function setThemeIcons(isLight) {
+      document.getElementById('icon-moon').style.display = isLight ? 'none' : 'block';
+      document.getElementById('icon-sun').style.display = isLight ? 'block' : 'none';
     }
 
-    // Load saved theme preference
-    function initTheme() {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
+    function toggleTheme() {
       const html = document.documentElement;
-      const toggle = document.getElementById('themeToggle');
+      const isLight = !html.classList.contains('light-mode');
+      html.classList.toggle('light-mode', isLight);
+      setThemeIcons(isLight);
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    }
 
-      if (savedTheme === 'light') {
-        html.classList.add('light-mode');
-        toggle.classList.add('active');
-      }
+    function initTheme() {
+      const isLight = (localStorage.getItem('theme') || 'dark') === 'light';
+      document.documentElement.classList.toggle('light-mode', isLight);
+      setThemeIcons(isLight);
     }
 
     // Initialize
