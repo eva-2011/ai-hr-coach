@@ -734,10 +734,7 @@
     <!-- Main Content -->
     <div class="main">
       <div class="header">
-        <div class="header-content">
-          <h1 id="screen-title">Welcome</h1>
-          <p id="screen-subtitle"></p>
-        </div>
+        <div class="header-content"></div>
         <div class="theme-toggle">
           <button class="theme-icon-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">
             <!-- Moon icon (shown in dark mode) -->
@@ -1393,8 +1390,6 @@
 
       // Update header
       if (screenConfig[screenId]) {
-        document.getElementById('screen-title').textContent = screenConfig[screenId].title;
-        document.getElementById('screen-subtitle').textContent = screenConfig[screenId].subtitle;
       }
     }
 
